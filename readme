@@ -1,3 +1,6 @@
 Java Web
 from zero
 servelet learing
+P:
+1.session.getAttribute("XX")应当在当前的session中存在
+ //session.setAttribute("xx", xx)
