@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Dao.LoginDb;
+import Dao.MeaasgeDb;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import control.LoginControl;
 import model.*;
@@ -49,6 +50,25 @@ public class LoginService extends HttpServlet {
         }
         if(ps.equals(l.getPassword())) //成功
         {
+            MeaasgeDb messageDb = new MeaasgeDb();
+            ArrayList<Message> list =messageDb.queryById(id);
+            int times =0;
+            if(list==null)
+            {
+                times=0;
+            }
+            else
+            {
+                times=list.size();
+            }
+            System.out.println(times);
+            String tm = String.valueOf(times);
+            session.setAttribute("times", tm);
+            req.setAttribute("times", tm);
+            session.setAttribute("login", l);
+            session.setAttribute("name", l.getName());
+            System.out.println("111");
+
             req.getRequestDispatcher("/vip.jsp").forward(req, resp);
         }
         else
